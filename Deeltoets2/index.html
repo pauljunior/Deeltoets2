@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Paul's web app skeleton v0.2</title>
+	<link href="./css/style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+	<header>
+		<h1><span>Tournament: </span>Amsterdam Ultimate Autumn</h1>
+		<nav>
+			<ul>
+				<li><a href="#/schedule" data>schedule</a></li>
+				<li><a href="#/ranking">ranking</a></li>
+				<li><a href="#/score">Voer de score in!</a></li>
+		    </ul>
+		</nav>
+	</header>
+	
+		<article id="content">
+		<section data-route="schedule" class="active">
+			<h1 data-bind="title">Pool A - Schedule</h1>			  
+			<table>
+                <tbody><tr>
+                    <th data-bind="today">Datum</th>
+                    <th>Team</th>
+                    <th>Result</th>
+                    <th>Team</th>
+                </tr>
+				</tbody><tbody data-bind="objects">
+					<tr>
+						<td><span data-bind="time"></td>
+						<td data-bind="team_1"><span data-bind="name"></span></td>
+						<td><span data-bind="team_1_score"></span> - <span data-bind="team_2_score"></span></td>
+						<td data-bind="team_2"><span data-bind="name"></span></td>
+					</tr>
+				</tbody>
+            </table>			  
+		</section>
+
+		<section data-route="ranking">
+			<h1 data-bind="title"></h1>
+			<table>
+                <tbody><tr>
+                    <th>Team</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>Points won</th>
+                    <th>Points lost</th>
+                    <th>+/-</th>
+                </tr>
+				</tbody><tbody data-bind="ranking">
+					<tr>
+						<td data-bind="team"></td>
+						<td data-bind="Win"></td>
+						<td data-bind="Lost"></td>
+						<td data-bind="Pw"></td>
+						<td data-bind="Pl"></td>
+						<td data-bind="Pl"></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		
+		<section data-route="score">
+			<h1 data-bind="title"></h1>
+			<table>
+                <tbody><tr>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+					<th>Verzenden</th>
+                </tr>
+					<tr>
+						<td input type="button" value="Add first" id="plus1" />+</td>
+						<td input type="button" value="Add second" id="plus2" />+</td>
+						<td id="finalScore">Final score</td>
+					</tr>
+					<tr>
+						<td id="addScore1"></td>
+						<td id="addScore2"></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		   
+	</article>
+
+
+
+
+<!-- Include all Javascripts -->
+	<script src="./js/libraries/transparancy.min.js"></script>
+	<script src="./js/libraries/ready.min.js"></script>
+	<script src="./js/libraries/routie.min.js"></script>
+	<script src="./js/libraries/qwery.min.js"></script>
+	<script src="./js/main.js" defer></script>
+	<script src="./js/libraries/quo.js"></script>
+
+	
+
+
+
+    </body>
+</html>
