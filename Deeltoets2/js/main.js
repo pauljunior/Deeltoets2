@@ -1,6 +1,13 @@
 //namespace wordt hier aangemaakt
 var FRISBEE = FRISBEE || {}; 
 
+// zorg voor je tabs!!!!!!!!!!!
+
+
+
+
+
+
 
 //self invoking function wordt aaangemaakt
 (function(){
@@ -12,6 +19,7 @@ var FRISBEE = FRISBEE || {};
 		
 			FRISBEE.router.init();				 
 			document.getElementById('finalScore').onclick = function () {
+				//denk aan je indent
 						var type 		=  'POST',
 						url  		=  'https://api.leaguevine.com/v1/game_scores/',
 						postData 	= JSON.stringify({
@@ -42,12 +50,6 @@ var FRISBEE = FRISBEE || {};
 	};
 	
 	FRISBEE.Tournament = {
-			poolData: $$.json('https://api.leaguevine.com/v1/game_scores/?tournament_id=19389&access_token=1aa66ab3f7',{}, function(data){
-			FRISBEE.Tournament.pools = data;
-			Transparency.render(qwery('[data-route=schedule')[0], FRISBEE.Tournament.pools);
-			console.log(FRISBEE.Tournament.pools);
-		})
-		
 		
 	};
 	
@@ -63,6 +65,7 @@ var FRISBEE = FRISBEE || {};
 
 	
 FRISBEE.score = {
+	//kan je dit niet in je game pagina zettten?
     score1: 0,
     score2: 0,
 
@@ -170,7 +173,10 @@ FRISBEE.score = {
 	// Dit zorgt ervoor dat de pages gekoppeld worden aan de .change functie.
 	FRISBEE.page = {
 		schedule: function () {
-			Transparency.render(qwery('[data-route=schedule')[0], FRISBEE.schedule);
+			console.log(FRISBEE.Tournament.data);
+		poolData: $$.json('https://api.leaguevine.com/v1/game_scores/?tournament_id=19389&access_token=1aa66ab3f7',{}, function(data){
+			Transparency.render(qwery('[data-route=schedule')[0], data);
+		})
 			FRISBEE.router.change();
 		},
 
@@ -193,6 +199,7 @@ FRISBEE.score = {
 	//Initiate the FRISBEElication
 	domready(function () {
 	    FRISBEE.controller.init();
+	    //waarom laadt je deze in?
 	    FRISBEE.score.init();
 	    console.log('Init done!')
 	});
