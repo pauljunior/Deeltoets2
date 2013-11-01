@@ -90,8 +90,8 @@ FRISBEE.score = {
     },
 
     reset: function () {
-        score1 = 0;
-        score2 = 0;
+        score1 = FRISBEE.Tournament.pools.objects[0].team_1_score;
+        score2 = FRISBEE.Tournament.pools.objects[0].team_2_score;
         document.getElementById('addScore1').innerHTML = score1;
         document.getElementById('addScore2').innerHTML = score2;
     }
