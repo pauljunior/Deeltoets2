@@ -36,8 +36,8 @@ var FRISBEE = FRISBEE || {};
 	
 FRISBEE.score = {
 	title: "score",
-    score1: 0,
-    score2: 0,
+    score1: undefined,
+    score2: undefined,
 	
 	
 	
@@ -69,9 +69,10 @@ FRISBEE.score = {
 				console.log("verzonden");
 			};
 	
-	
-        score1 = parseInt(document.getElementById('addScore1').innerHTML);
-        score2 = parseInt(document.getElementById('addScore2').innerHTML);
+	var tScore = parseInt(document.getElementById('addScore1').innerHTML);
+        score1 = isNaN(tScore) ? 0 : tScore;
+        tScore = parseInt(document.getElementById('addScore2').innerHTML);
+        score2 = isNaN(tScore) ? 0 : tScore;
         document.getElementById('plus1').onclick = function () {
             score1++;
             document.getElementById('addScore1').innerHTML = score1;
