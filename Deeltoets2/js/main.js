@@ -17,7 +17,12 @@ var FRISBEE = FRISBEE || {};
 	
 	//schedule met key values etc. (+ een array met naamloze objecten) 
 	FRISBEE.schedule = {
-	};
+		date: function () {
+			var str = 	FRISBEE.page.render.schedule.poolData.objects[0].start_time;
+			if(str.length > 10) str = str.substring(0,10);
+			return str;
+		}
+	}
 	
 	
 	FRISBEE.directives = {
@@ -25,7 +30,7 @@ var FRISBEE = FRISBEE || {};
 			objects: {
 				track_score: {
 					href: function() {
-						return '#/score/' + this.game_id;
+						return '#/score/' + this.id;
 					}
 				}
 			}
@@ -35,14 +40,14 @@ var FRISBEE = FRISBEE || {};
     FRISBEE.score = {
 			score1: 0,
 			score2: 0,
-		init: function () {
-		document.getElementById('finalScore').onclick = function () {
+			init: function () {
+			document.getElementById('finalScore').onclick = function () {
 			var type 		=  'POST',
 			url  		=  'https://api.leaguevine.com/v1/game_scores/',
 				postData 	= JSON.stringify({
 					game_id: FRISBEE.page.render.score.scoreData.id,
-					team_1_score: '1',
-					team_2_score: '1',
+					team_1_score: FRISBEE.score.getScore1(),
+					team_2_score: FRISBEE.score.getScore2(),
 					is_final: 'True'
 				});
 
@@ -62,39 +67,35 @@ var FRISBEE = FRISBEE || {};
 				console.log("verzonden");
 			};
 			
-			//Setup plus min
-		
-            score1 = parseInt(document.getElementById('addScore1').innerHTML);
-            score2 = parseInt(document.getElementById('addScore2').innerHTML);
-            document.getElementById('plus1').onclick = function () {
-                score1++;
-                document.getElementById('addScore1').innerHTML = score1;
-                console.log(this.score1);
-            };
-            document.getElementById('plus2').onclick = function () {
-                score2++;
-                document.getElementById('addScore2').innerHTML = score2;
-                console.log(score2);
-            };
-        },
-
-        reset: function() {
-            score1 = 0;
-            score2 = 0;
+        score1 = parseInt(document.getElementById('addScore1').innerHTML);
+        score2 = parseInt(document.getElementById('addScore2').innerHTML);
+        document.getElementById('plus1').onclick = function () {
+            score1++;
             document.getElementById('addScore1').innerHTML = score1;
+            console.log(score1);
+        };
+        document.getElementById('plus2').onclick = function () {
+            score2++;
             document.getElementById('addScore2').innerHTML = score2;
-        },
+            console.log(score2);
+        };
+    },
 
-        getScore1: function () {
-            return score1;
-        },
+    getScore1: function() {
+        return score1;
+    },
 
-        getScore2: function () {
-            return score2;
-        }
-		
-		
-    };
+    getScore2: function() {
+        return score2;
+    },
+
+    reset: function () {
+        score1 = FRISBEE.Tournament.pools.objects[0].team_1_score;
+        score2 = FRISBEE.Tournament.pools.objects[0].team_2_score;
+        document.getElementById('addScore1').innerHTML = score1;
+        document.getElementById('addScore2').innerHTML = score2;
+    }
+};
 
 	
 	
@@ -156,8 +157,6 @@ var FRISBEE = FRISBEE || {};
             if (!route) {
             	sections[0].classList.add('active');
             }
-
-
 		}
 	};
 
@@ -172,7 +171,9 @@ var FRISBEE = FRISBEE || {};
 	FRISBEE.page = { 
 		render: { 
 			schedule: function () {
-				$$.get('https://api.leaguevine.com/v1/game_scores/?tournament_id=19389&access_token=1aa66ab3f7',{},function(data){
+				$$.get('https://api.leaguevine.com/v1/games/?pool_id=19219&access_token=45d8e60120',{},function(data){
+					$$('#schedule-pool').show();
+					$$('#schedule-load').hide();
 					var directives = FRISBEE.directives.schedule;
 					FRISBEE.page.render.schedule.poolData = data;
 					Transparency.render(qwery('[data-route=schedule]')[0], FRISBEE.page.render.schedule.poolData, directives);
@@ -181,8 +182,11 @@ var FRISBEE = FRISBEE || {};
 				})
 			},
 			ranking: function () {
-				Transparency.render(qwery('[data-route=ranking]')[0], FRISBEE.ranking);
-				FRISBEE.router.change('ranking');
+				$$.get('https://api.leaguevine.com/v1/pools/19219/?access_token=e059970fe0',{},function(data){
+					FRISBEE.page.render.ranking.poolData = data;
+					Transparency.render(qwery('[data-route=ranking]')[0], FRISBEE.page.render.ranking.poolData);
+					FRISBEE.router.change('ranking');
+				})
 			},
 		
 			score: function(game_id) {

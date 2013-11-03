@@ -20,24 +20,29 @@
 	
 		<article id="content">
 		<section data-route="schedule" class="active">
-			<h1 data-bind="title">Pool A - Schedule</h1>			  
-			<table>
+			<h1>Pool A - Schedule</h1>		
+				<span id="schedule-load">
+                 <img src="img/load.gif" alt="Loading the pool..." />
+                 <span>Loading schedule...</span>
+				<table id="schedule-pool" style="display: none;">
+					<thead>
                 <tbody><tr>
-                    <th data-bind="today">Datum</th>
+                    <th>Datum</th>
                     <th>Team</th>
                     <th>Result</th>
                     <th>Team</th>
                 </tr>
+				</thead>
 				</tbody><tbody data-bind="objects">
 					<tr>
-						<td><span data-bind="time"></td>
+						<td data-bind="start_time">21-10-13</td>
 						<td data-bind="team_1"><span data-bind="name"></span></td>
 						<td><span data-bind="team_1_score"></span> - <span data-bind="team_2_score"></span></td>
 						<td data-bind="team_2"><span data-bind="name"></span></td>
 						<td><a href="#/score" data-bind="track_score">Update Score</a></td>
 					</tr>
 				</tbody>
-            </table>			  
+            </table>
 		</section>
 
 		<section data-route="ranking">
@@ -51,14 +56,14 @@
                     <th>Points lost</th>
                     <th>+/-</th>
                 </tr>
-				</tbody><tbody data-bind="ranking">
+				</tbody><tbody data-bind="standings">
 					<tr>
-						<td data-bind="team"></td>
-						<td data-bind="Win"></td>
-						<td data-bind="Lost"></td>
-						<td data-bind="Pw"></td>
-						<td data-bind="Pl"></td>
-						<td data-bind="Pl"></td>
+						<td data-bind="team"><span data-bind="name"></span></td>
+						<td data-bind="wins"></td>
+						<td data-bind="losses"></td>
+						<td data-bind="points_scored"></td>
+						<td data-bind="points_allowed"></td>
+						<td data-bind="plus_minus"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -69,16 +74,16 @@
                 <tbody><tr>
                     <th data-bind="team_1"><span data-bind="name"></span></th>
                     <th data-bind="team_2"><span data-bind="name"></span></th>
-					<th>Verzenden</th>
                 </tr>
 					<tr>
 						<td input type="button" value="Add first" id="plus1" />+</td>
 						<td input type="button" value="Add second" id="plus2" />+</td>
-						<td id="finalScore">Final score</td>
+
 					</tr>
 					<tr>
-						<td id="addScore1"></td>
-						<td id="addScore2"></td>
+						<td id="addScore1">0</td>
+						<td id="addScore2">0</td>
+						<td id="finalScore"><a href="#/schedule">Updaten</a></td>
 					</tr>
 				</tbody>
 			</table>
