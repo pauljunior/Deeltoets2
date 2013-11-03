@@ -14,7 +14,6 @@
 			<ul>
 				<li><a href="#/schedule" data>schedule</a></li>
 				<li><a href="#/ranking">ranking</a></li>
-				<li><a href="#/score">Voer de score in!</a></li>
 		    </ul>
 		</nav>
 	</header>
@@ -35,7 +34,7 @@
 						<td data-bind="team_1"><span data-bind="name"></span></td>
 						<td><span data-bind="team_1_score"></span> - <span data-bind="team_2_score"></span></td>
 						<td data-bind="team_2"><span data-bind="name"></span></td>
-						<td><a data-bind="track_score">Track Score</a></td>
+						<td><a href="#/score" data-bind="track_score">Update Score</a></td>
 					</tr>
 				</tbody>
             </table>			  
@@ -65,12 +64,12 @@
 			</table>
 		</section>
 		
-		<section data-route="game">
+		<section data-route="score">
 			<h1 data-bind="title"></h1>
-			<table>
+			<table data-bind="objects">
                 <tbody><tr>
-                    <th>Team 1</th>
-                    <th>Team 2</th>
+                    <th data-bind="team_1"><span data-bind="name"></span></th>
+                    <th data-bind="team_2"><span data-bind="name"></span></th>
 					<th>Verzenden</th>
                 </tr>
 					<tr>
@@ -96,7 +95,7 @@
 	<script src="./js/libraries/ready.min.js"></script>
 	<script src="./js/libraries/routie.min.js"></script>
 	<script src="./js/libraries/qwery.min.js"></script>
-	<script src="./js/main.js" defer></script>
+	<script src="./js/main.js"></script>
 	<script src="./js/libraries/quo.js"></script>
 
 	
