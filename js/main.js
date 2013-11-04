@@ -78,7 +78,7 @@ var FRISBEE = FRISBEE || {};
 			return score2; 
 		},
 		
-		//zorgt ervoor dat de score de juiste 
+		//zorgt ervoor dat de score de juiste waarde bevat
 		reset: function () {
 			score1 = FRISBEE.page.render.score.scoreData.team_1_score;
 			score2 = FRISBEE.page.render.score.scoreData.team_2_score;
@@ -163,7 +163,7 @@ var FRISBEE = FRISBEE || {};
 		}
 	};
 
-	// Dit zorgt ervoor dat de pages gekoppeld worden aan de .change functie.
+	// Dit zorgt ervoor dat de pages gekoppeld worden aan de .change functie DT2: Ook word hier de api opgehaald
 
 	FRISBEE.page = { 
 		render: { 
