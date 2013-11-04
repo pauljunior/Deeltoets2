@@ -20,70 +20,83 @@
 	
 		<article id="content">
 		<section data-route="schedule" class="active">
-			<h1 data-bind="title">Pool A - Schedule</h1>			  
-			<table>
-                <tbody><tr>
-                    <th data-bind="today">Datum</th>
-                    <th>Team</th>
-                    <th>Result</th>
-                    <th>Team</th>
-                </tr>
-				</tbody><tbody data-bind="objects">
-					<tr>
-						<td><span data-bind="time"></td>
-						<td data-bind="team_1"><span data-bind="name"></span></td>
-						<td><span data-bind="team_1_score"></span> - <span data-bind="team_2_score"></span></td>
-						<td data-bind="team_2"><span data-bind="name"></span></td>
-						<td><a href="#/score" data-bind="track_score">Update Score</a></td>
+			<span id="schedule-load">
+				<img src="img/load.gif" alt="Loading the schedule..." />
+					 <span>Loading schedule...</span>
+			</span>
+				<h1>Pool A - Schedule</h1>
+					<section id="fade-in" class="box swipeLeft">
+					<table id="schedule-pool" style="opacity: 0;">
+						<thead>
+					<tbody><tr>
+						<th>Datum</th>
+						<th>Team 1</th>
+						<th>Team 2</th>
+						<th><input type="button" value="Reload Page" onClick="window.location.reload()"></th>
 					</tr>
-				</tbody>
-            </table>			  
+					</thead>
+					</tbody><tbody data-bind="objects">
+						<tr>
+							<td data-bind="tournament"><span data-bind="start_date"></span></td>
+							<td data-bind="team_1"><span data-bind="name"></br><span class="score" data-bind="team_1_score"></span></span></td>
+							<td data-bind="team_2"><span data-bind="name"></br><span class="score" data-bind="team_2_score"></span></span></td>
+							<td><a href="#/score" data-bind="track">Update</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
 		</section>
 
 		<section data-route="ranking">
-			<h1 data-bind="title"></h1>
-			<table>
-                <tbody><tr>
-                    <th>Team</th>
-                    <th>W</th>
-                    <th>L</th>
-                    <th>Points won</th>
-                    <th>Points lost</th>
-                    <th>+/-</th>
-                </tr>
-				</tbody><tbody data-bind="ranking">
-					<tr>
-						<td data-bind="team"></td>
-						<td data-bind="Win"></td>
-						<td data-bind="Lost"></td>
-						<td data-bind="Pw"></td>
-						<td data-bind="Pl"></td>
-						<td data-bind="Pl"></td>
+			<h1>Pool A - Rankings</h1>
+			<section id="fade-in" class="box swipeRight">
+					<span id="ranking-load">
+					 <img src="img/load.gif" alt="Loading the ranking..." />
+					 <span>Loading ranking...</span>
+					 </span>
+				<table id="ranking-pool" style="opacity: 0;">
+					<tbody><tr>
+						<th>Team</th>
+						<th>W</th>
+						<th>L</th>
+						<th>Points won</th>
+						<th>Points lost</th>
+						<th>+/-</th>
 					</tr>
-				</tbody>
-			</table>
+					</tbody><tbody data-bind="standings">
+						<tr>
+							<td data-bind="team"><span data-bind="name"></span></td>
+							<td data-bind="wins"></td>
+							<td data-bind="losses"></td>
+							<td data-bind="points_scored"></td>
+							<td data-bind="points_allowed"></td>
+							<td data-bind="plus_minus"></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
 		</section>
 		
-		<section data-route="score">
-			<h1 data-bind="title"></h1>
-			<table data-bind="objects">
+		<section id="fade-in" data-route="score">
+			<table>
                 <tbody><tr>
                     <th data-bind="team_1"><span data-bind="name"></span></th>
                     <th data-bind="team_2"><span data-bind="name"></span></th>
-					<th>Verzenden</th>
                 </tr>
 					<tr>
 						<td input type="button" value="Add first" id="plus1" />+</td>
 						<td input type="button" value="Add second" id="plus2" />+</td>
-						<td id="finalScore">Final score</td>
+
 					</tr>
 					<tr>
-						<td id="addScore1"></td>
-						<td id="addScore2"></td>
+						<td id="addScore1">0</td>
+						<td id="addScore2">0</td>
+						<td id="finalScore"><a href="#/schedule" id="update" >Updaten</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</section>
+
 		   
 	</article>
 
